@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATI INSYIRAH | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --accent-ocean: #003366; 
+            --accent-light: #e0f2fe;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(160px, auto);
+            gap: 20px;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative; /* Penting untuk kedudukan overlay */
+        }
+
+        .card:hover {
+            transform: scale(1.04);
+            border-color: var(--accent-ocean);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            z-index: 10;
+        }
+
+        /* Update Card 1: Profile dengan Background Image */
+        .profile { 
+            grid-column: span 2; 
+            grid-row: span 2; 
+            border-bottom: 6px solid var(--accent-ocean);
+            
+            /* Penambahan Background Image */
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white; /* Tukar teks ke putih supaya nampak atas gambar */
+        }
+
+        /* Overlay untuk Profile supaya teks senang dibaca */
+        .profile::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        /* Pastikan content profile berada di atas overlay */
+        .profile-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .profile h2 { color: white; }
+        .profile p { color: #e2e8f0; }
+        .profile .tagline { color: var(--accent-light); }
+
+        /* Layout Grid yang lain */
+        .location { grid-column: span 1; grid-row: span 1; }
+        .tech-stack { grid-column: span 1; grid-row: span 2; }
+        .hobby { grid-column: span 1; grid-row: span 1; }
+        .case-study { grid-column: span 2; grid-row: span 1; }
+        .reflection { grid-column: span 2; grid-row: span 1; background-color: #f8fafc; }
+        .playlist { grid-column: span 4; grid-row: span 1; background: var(--accent-ocean); color: white; }
+
+        h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 6px; }
+        h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-ocean); margin-bottom: 10px; font-weight: 600; }
+        .playlist h3 { color: var(--accent-light); }
+        p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .playlist p { color: #cbd5e1; }
+
+        .tagline { 
+            font-style: italic; 
+            font-weight: 500; 
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .links { display: flex; gap: 10px; margin-top: 20px; }
+        .links a { 
+            text-decoration: none; 
+            font-size: 0.8rem; 
+            color: var(--accent-ocean); 
+            font-weight: 600;
+            padding: 8px 14px;
+            background: white; /* Putih supaya kontra dengan background gambar */
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        .links a:hover { background: var(--accent-ocean); color: white; }
+
+        .tag-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .tag { 
+            background: #f8fafc; 
+            padding: 8px 12px; 
+            border-left: 3px solid var(--accent-ocean);
+            border-radius: 4px; 
+            font-size: 0.85rem; 
+            font-weight: 500; 
+        }
+
+        .player-ui {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .player-progress {
+            width: 75%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 850px) {
+            .container { display: flex; flex-direction: column; }
+            .card { min-height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card profile">
+            <div class="profile-content">
+                <div>
+                    <h3>Student Portfolio</h3>
+                    <h2>ATI INSYIRAH</h2>
+                    <p>Food Science | Year 1</p>
+                    <p class="tagline">"Innovating food safety."</p>
+                </div>
+                <div class="links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">UMT Portal</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card location">
+            <h3>Current Location</h3>
+            <p><strong>UMT, Kuala Nerus</strong></p>
+            <p>Terengganu, MY</p>
+        </div>
+
+        <div class="card tech-stack">
+            <h3>Core Subjects</h3>
+            <div class="tag-list">
+                <div class="tag">Food Chemistry</div>
+                <div class="tag">Microbiology</div>
+                <div class="tag">Excel</div>
+                <div class="tag">Lab Analysis</div>
+            </div>
+        </div>
+
+        <div class="card hobby">
+            <h3>Lifestyle</h3>
+            <p><strong>Evening walks</strong></p>
+            <p>Pantai UMT</p>
+        </div>
+
+        <div class="card case-study">
+            <h3>Recent Case Study</h3>
+            <h2>Starch Gelatinization</h2>
+            <p>Analyzing texture profiles of Kuih Lapis.</p>
+        </div>
+
+        <div class="card reflection">
+            <h3>Why Food Tech Matters in Malaysia</h3>
+            <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
+        </div>
+
+       <iframe
+  style="border-radius:12px"
+  src="https://open.spotify.com/embed/track/5S0QxfYABBoLI4sMk2aCa2"
+  width="100%"
+  height="352"
+  frameborder="0"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  loading="lazy">
+</iframe>
+            <div style="width: 100%;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3>Atmosphere</h3>
+                        <p><strong>Deep Work Playlist</strong></p>
+                    </div>
+                    <span style="font-size: 1.5rem;">🌊</span>
+                </div>
+                <div class="player-ui">
+                    <div class="player-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
